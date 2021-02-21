@@ -1,12 +1,16 @@
-'use strict'
-
 require('dotenv').config()
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
+const mongoose = require('mongoose')
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
-
+  await mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
   // Do not touch the following lines
 
   // This loads all plugins defined in plugins

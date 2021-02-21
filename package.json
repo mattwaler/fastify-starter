@@ -8,7 +8,7 @@
     "start": "fastify start -l info app.js",
     "dev": "npm-run-all -p dev:*",
     "dev:fastify": "fastify start -w -l info -P app.js",
-    "dev:proxy": "browser-sync start -c bs.config.js",
+    "dev:proxy": "sleep 3 && browser-sync start -c bs.config.js",
     "dev:webpack": "webpack --watch"
   },
   "keywords": [],
@@ -16,12 +16,14 @@
   "license": "ISC",
   "dependencies": {
     "alpinejs": "^2.8.0",
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "fastify": "^3.0.0",
     "fastify-autoload": "^3.3.1",
     "fastify-cli": "^2.7.0",
     "fastify-plugin": "^3.0.0",
     "fastify-static": "^4.0.0",
+    "mongoose": "^5.11.17",
     "point-of-view": "^4.13.0",
     "twig": "^1.15.4"
   },

@@ -1,0 +1,14 @@
+# Create User
+
+POST http://localhost:3000/api/user
+content-type: application/json
+
+{
+  "email": "contact@mattwaler.com",
+  "password": "testing"
+}
+
+###
+
+GET http://localhost:3000/api/user/60327d544e1f3913c845890f
+content-type: application/json
