@@ -1,5 +1,6 @@
 'use strict'
 
+require('dotenv').config()
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
 
