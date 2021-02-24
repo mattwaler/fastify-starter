@@ -1,10 +1,10 @@
-{% extends 'layout.twig' %}
+{% extends 'partials/layout.twig' %}
 {% set title = 'Home' %}
 
 {% block body %}
   <section class="container py-16 text-center">
     <h1 class="text-4xl font-black">
-      Hello from the server!
+      Hello, {{ email ?? 'guest' }}!
     </h1>
     <p class="mt-2 text-lg">This web app is built with Fastify, Twig, and Tailwind CSS!</p>
   </section>

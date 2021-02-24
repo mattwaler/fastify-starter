@@ -1,0 +1,13 @@
+<header class="bg-gray-200 py-8">
+  <div class="container flex items-center justify-between">
+    <a href="/">Home</a>
+    <nav class="flex items-center space-x-4">
+      {% if email %}
+        <a href="/api/logout">Logout</a>
+      {% else %}
+        <a href="/create">Create Account</a>
+        <a href="/login">Login</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>

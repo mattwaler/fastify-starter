@@ -37,7 +37,7 @@ module.exports = {
   xip: false,
   hostnameSuffix: false,
   reloadOnRestart: false,
-  notify: true,
+  notify: false,
   scrollProportionally: true,
   scrollThrottle: 0,
   scrollRestoreTechnique: "window.name",

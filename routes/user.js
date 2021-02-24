@@ -27,22 +27,6 @@ module.exports = async function (fastify, opts) {
     }
   })
 
-  // Get All Users
-  fastify.get('/api/user', async function (request, reply) {
-    try {
-      const users = await User.find()
-      return reply.code(200).send({
-        success: true,
-        users,
-      })
-    } catch (err) {
-      return reply.code(400).send({
-        success: false,
-        data: err
-      })
-    }
-  })
-
   // Get One User
   fastify.get('/api/user/:id', async function (request, reply) {
     const { id } = request.params

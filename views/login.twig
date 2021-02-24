@@ -1,0 +1,49 @@
+{% extends 'partials/layout.twig' %}
+{% set title = 'Login' %}
+
+{% block body %}
+  <script>
+    function login() {
+      return {
+        state: 'initial',
+        email: null,
+        password: null,
+        async submit() {
+          const { data } = await axios.post('/api/login', {
+            email: this.email,
+            password: this.password,
+          })
+          return data.success
+            ? window.location = '/'
+            : this.state = 'error'
+        }
+      }
+    }
+  </script>
+
+  <section x-data="login()" class="container py-16">
+    <h1 class="text-4xl font-black">
+      {{ title }}
+    </h1>
+    <form class="mt-4">
+      <label class="block">
+        Email:
+        <input
+          x-model="email"
+          class="block"
+          type="email"
+        >
+      </label>
+      <label class="block">
+        Password:
+        <input
+          @keydown.enter="submit"
+          x-model="password"
+          class="block"
+          type="password"
+        >
+      </label>
+      <button class="mt-4 bg-gray-900 text-white p-2" @click.prevent="submit">Submit</button>
+    </form>
+  </section>
+{% endblock %}

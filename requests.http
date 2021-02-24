@@ -4,11 +4,16 @@ POST http://localhost:3000/api/user
 content-type: application/json
 
 {
-  "email": "contact@mattwaler.com",
+  "email": "dummy@gmail.com",
   "password": "testing"
 }
 
-###
+### Login
 
-GET http://localhost:3000/api/user/60327d544e1f3913c845890f
+POST http://localhost:3000/api/login
 content-type: application/json
+
+{
+  "email": "dummy@gmail.com",
+  "password": "testing"
+}
