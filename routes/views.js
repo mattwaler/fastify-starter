@@ -5,12 +5,10 @@ async function getServerData(request) {
   let data = {
     devMode: process.env.NODE_ENV !== 'production'
   }
-
   if (session) {
     const user = await User.findById(session.id)
     data = { ...data, email: user.email }
   }
-
   return {
     data,
     session,
@@ -20,16 +18,21 @@ async function getServerData(request) {
 module.exports = async function (fastify, opts) {
   fastify.get('/', async function (request, reply) {
     const { data } = await getServerData(request)
-    return reply.view('index', data)
+    return reply.view('home', data)
   })
 
-  fastify.get('/login', async function (request, reply) {
-    const { session, data } = await getServerData(request)
-    return session ? reply.redirect('/') : reply.view('login', data)
+  fastify.get('/account', async function (request, reply) {
+    const { data } = await getServerData(request)
+    return reply.view('account', data)
   })
 
   fastify.get('/create', async function (request, reply) {
     const { session, data } = await getServerData(request)
     return session ? reply.redirect('/') : reply.view('create', data)
+  })
+
+  fastify.get('/login', async function (request, reply) {
+    const { session, data } = await getServerData(request)
+    return session ? reply.redirect('/') : reply.view('login', data)
   })
 }

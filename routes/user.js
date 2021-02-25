@@ -27,12 +27,15 @@ module.exports = async function (fastify, opts) {
     }
   })
 
-  // Get One User
-  fastify.get('/api/user/:id', async function (request, reply) {
-    const { id } = request.params
-
+  // Update User
+  fastify.patch('/api/user', async function (request, reply) {
+    const session = request.session.get('session')
+    // Disallow if no session
+    if (!session) {
+      return reply.code(401).send({ success: false })
+    }
     try {
-      const user = await User.findById(id)
+      const user = await User.findOneAndUpdate(session.id, request.body, { new: true })
       return reply.code(200).send({
         success: true,
         user,

@@ -3,6 +3,7 @@
     <a href="/">Home</a>
     <nav class="flex items-center space-x-4">
       {% if email %}
+        <a href="/account">Account</a>
         <a href="/api/logout">Logout</a>
       {% else %}
         <a href="/create">Create Account</a>
