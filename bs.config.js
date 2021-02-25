@@ -43,7 +43,7 @@ module.exports = {
   scrollRestoreTechnique: "window.name",
   scrollElements: [],
   scrollElementMapping: [],
-  reloadDelay: 0,
+  reloadDelay: 2000,
   reloadDebounce: 500,
   reloadThrottle: 0,
   plugins: [],

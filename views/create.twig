@@ -21,34 +21,29 @@
     }
   </script>
 
-  <section x-data="create()" class="container py-16">
+  <section x-data="create()" class="container max-w-lg py-16">
     <h1 class="text-4xl font-black">
       {{ title }}
     </h1>
-    <form class="mt-4">
+    <form class="mt-4 flex-wrap">
       <label class="block">
         Email:
         <input
           x-model="email"
-          class="block"
+          class="block rounded w-full"
           type="email"
         >
       </label>
-      <label class="block">
+      <label class="block mt-4">
         Password:
         <input
           @keydown.enter="submit"
           x-model="password"
-          class="block"
+          class="block rounded w-full"
           type="password"
         >
       </label>
-      <button
-        class="mt-4 bg-gray-900 text-white p-2"
-        @click.prevent="submit"
-      >
-        Submit
-      </button>
+      <button class="mt-8 bg-gray-900 text-white px-4 py-2 rounded" @click.prevent="submit">Submit</button>
     </form>
   </section>
 {% endblock %}

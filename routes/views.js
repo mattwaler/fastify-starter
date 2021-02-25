@@ -1,36 +1,35 @@
 const User = require('../models/User')
 
-module.exports = async function (fastify, opts) {
+async function getServerData(request) {
+  const session = request.session.get('session')
+  let data = {
+    devMode: process.env.NODE_ENV !== 'production'
+  }
 
-  // Homepage
+  if (session) {
+    const user = await User.findById(session.id)
+    data = { ...data, email: user.email }
+  }
+
+  return {
+    data,
+    session,
+  }
+}
+
+module.exports = async function (fastify, opts) {
   fastify.get('/', async function (request, reply) {
-    let data = {}
-    const session = request.session.get('session')
-    if (session) {
-      const user = await User.findById(session.id)
-      data = {
-        email: user.email,
-      }
-    }
+    const { data } = await getServerData(request)
     return reply.view('index', data)
   })
 
-  // Login
   fastify.get('/login', async function (request, reply) {
-    const session = request.session.get('session')
-    if (session) {
-      return reply.redirect('/')
-    }
-    return reply.view('login')
+    const { session, data } = await getServerData(request)
+    return session ? reply.redirect('/') : reply.view('login', data)
   })
 
-  // Login
   fastify.get('/create', async function (request, reply) {
-    const session = request.session.get('session')
-    if (session) {
-      return reply.redirect('/')
-    }
-    return reply.view('create')
+    const { session, data } = await getServerData(request)
+    return session ? reply.redirect('/') : reply.view('create', data)
   })
-
 }

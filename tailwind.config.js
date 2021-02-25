@@ -5,6 +5,9 @@ module.exports = {
       center: true,
       padding: '2rem',
     },
+    debugScreens: {
+      position: ['bottom', 'right'],
+    },
     screens: {
       sm: '640px',
       md: '768px',
