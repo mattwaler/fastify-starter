@@ -1,8 +1,8 @@
-<header class="bg-gray-200 py-8">
+<header class="py-8">
   <div class="container flex items-center justify-between">
     <a href="/">Home</a>
-    <nav class="flex items-center space-x-4">
-      {% if email %}
+    <nav class="flex items-center space-x-8">
+      {% if user %}
         <a href="/account">Account</a>
         <a href="/api/logout">Logout</a>
       {% else %}

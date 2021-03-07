@@ -6,14 +6,19 @@
     function update() {
       return {
         state: 'initial',
-        email: '{{ email }}',
-        password: null,
+        message: null,
+        email: '{{ user.email }}',
         async submit() {
-          const { data } = await axios.patch('/api/user', { email: this.email })
-          data.success ? this.state = 'success' : this.state = 'error'
-          setTimeout(() => {
-            this.state = 'initial'
-          }, 2500)
+          const { email } = this
+          const { data } = await axios.patch('/api/user', { email })
+          if (data.success) {
+            this.state = 'success'
+            this.message = data.message
+          } else {
+            this.state = 'error'
+            this.message = data.message ?? 'There was an issue updating your details, try again later.'
+          }
+          setTimeout(() => this.state = 'initial', 2500)
         }
       }
     }
@@ -32,13 +37,22 @@
           type="email"
         >
       </label>
-      <button class="mt-8 bg-gray-900 text-white px-4 py-2 rounded" @click.prevent="submit">Submit</button>
+      <button
+        class="mt-8 bg-gray-900 text-white px-4 py-2 rounded"
+        @click.prevent="submit"
+      >
+        Submit
+      </button>
     </form>
-    <p class="text-blue-500 mt-4" x-show.transition="state == 'success'">
-      Account details updated successfully!
-    </p>
-    <p class="text-red-500 mt-4" x-show.transition="state == 'error'">
-      There was an issue updating account details!
-    </p>
+    <p
+      class="text-blue-500 mt-4"
+      x-text="message"
+      x-show.transition="state == 'success'"
+    ></p>
+    <p
+      class="text-red-500 mt-4"
+      x-text="message"
+      x-show.transition="state == 'error'"
+    ></p>
   </section>
 {% endblock %}

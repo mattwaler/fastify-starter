@@ -7,7 +7,7 @@ async function getServerData(request) {
   }
   if (session) {
     const user = await User.findById(session.id)
-    data = { ...data, email: user.email }
+    data = { ...data, user }
   }
   return {
     data,
