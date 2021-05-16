@@ -1,5 +1,6 @@
 module.exports = {
   darkMode: false,
+  mode: 'jit',
   theme: {
     container: {
       center: true,
