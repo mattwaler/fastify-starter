@@ -8,9 +8,10 @@
         state: 'initial',
         message: null,
         email: '{{ user.email }}',
+        name: '{{ user.name ?? "" }}',
         async submit() {
-          const { email } = this
-          const { data } = await axios.patch('/api/user', { email })
+          const { email, name } = this
+          const { data } = await axios.patch('/api/user', { email, name })
           if (data.success) {
             this.state = 'success'
             this.message = data.message
@@ -18,7 +19,7 @@
             this.state = 'error'
             this.message = data.message ?? 'There was an issue updating your details, try again later.'
           }
-          setTimeout(() => this.state = 'initial', 2500)
+          setTimeout(() => this.state = 'initial', 3000)
         }
       }
     }
@@ -37,6 +38,14 @@
           type="email"
         >
       </label>
+      <label class="block mt-4">
+        Name:
+        <input
+          x-model="name"
+          class="block rounded w-full"
+          type="text"
+        >
+      </label>
       <button
         class="mt-8 bg-gray-900 text-white px-4 py-2 rounded"
         @click.prevent="submit"
@@ -45,14 +54,10 @@
       </button>
     </form>
     <p
-      class="text-blue-500 mt-4"
+      class="mt-4 font-bold"
+      :class="state == 'error' ? 'text-red-500' : 'text-blue-500'"
       x-text="message"
-      x-show.transition="state == 'success'"
-    ></p>
-    <p
-      class="text-red-500 mt-4"
-      x-text="message"
-      x-show.transition="state == 'error'"
+      x-show.transition="state != 'initial'"
     ></p>
   </section>
 {% endblock %}

@@ -1,11 +1,17 @@
 # Fastify Starter
 
-A starter with Fastify, Twig, Tailwind, and Alpine ready to go!
+A full-stack project starter, which is basically just a combination of the following tools:
+- Alpine
+- Fastify
+- Mongoose
+- Tailwind
+- Turbolinks
+- Twig
 
 ## Getting Started
 
-1. Make sure you've got MongoDB running
-2. Run `npm i` for dependencies
-3. Duplicate `.env.example` and configure to your liking
-4. Run `npm run gen:key` to generate session key
-5. Run `npm run dev`
+1. Get MongoDB running locally.
+2. Duplicate `.env.example` and get your ish together.
+3. Run `npm i` for that big ol' node_modules folder.
+4. Run `npm run gen:key` to generate session key.
+5. Run `npm run dev` to kick that server up and get going!

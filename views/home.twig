@@ -4,8 +4,8 @@
 {% block body %}
   <section class="container py-16">
     <h1 class="text-4xl font-black">
-      Hello, {{ user.email ?? 'guest' }}!
+      Hello, {{ user.name ?? user.email ?? 'guest' }}!
     </h1>
-    <p class="mt-2 text-lg">This web app is built with Fastify, Twig, Tailwind, and Alpine!</p>
+    <p class="mt-2 text-lg">Welcome to my fastify starter project! Hope you like it.</p>
   </section>
 {% endblock %}

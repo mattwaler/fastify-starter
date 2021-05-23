@@ -5,4 +5,12 @@ module.exports = {
   notify: false,
   reloadDebounce: 500,
   reloadDelay: 500,
+  snippetOptions: {
+    rule: {
+      fn: function (snippet, match) {
+        return snippet + match
+      },
+      match: /<\/head>/i,
+    },
+  },
 }

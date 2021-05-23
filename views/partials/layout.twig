@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="antialiased" lang="en">
+<html class="{{ devMode ? 'debug-screens' }}" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
   <title>{{ title }}</title>
   {{ block('head') }}
 </head>
-<body class="{{ devMode ? 'debug-screens' }}">
+<body>
   {% include 'header.twig' %}
   {{ block('body') }}
 </body>
