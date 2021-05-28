@@ -28,6 +28,11 @@ module.exports = async function (fastify, opts) {
     options: Object.assign({}, opts)
   })
 
-  // Binding fastify to a port for deployment
-  fastify.listen(process.env.PORT || 3000, '0.0.0.0')
+  // Binding fastify to a port for
+  fastify.listen(process.env.PORT || 3000, '0.0.0.0', (err) => {
+    if (err) {
+      fastify.log.error(err)
+      process.exit(1)
+    }
+  })
 }
