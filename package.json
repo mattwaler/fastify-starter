@@ -10,7 +10,7 @@
     "dev:proxy": "sleep 3 && browser-sync start -c bs.config.js",
     "dev:webpack": "webpack --watch",
     "gen:key": "secure-session-gen-key > secret-key",
-    "start": "fastify start -l info app.js",
+    "start": "npm run gen:key && fastify start -l info app.js",
     "test": "tap tests/**/*.test.js"
   },
   "keywords": [],
