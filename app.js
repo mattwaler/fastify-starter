@@ -27,4 +27,12 @@ module.exports = async function (fastify, opts) {
     dir: path.join(__dirname, 'routes'),
     options: Object.assign({}, opts)
   })
+
+  // Binding fastify to a port for deployment
+  fastify.listen(process.env.PORT || 3000, (err) => {
+    if (err) {
+      fastify.log.error(err)
+      process.exit(1)
+    }
+  })
 }
