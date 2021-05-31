@@ -6,6 +6,7 @@ module.exports = (fastify) => ({
   post: {
     handler: async (request, reply) => {
       const { body } = request;
+
       // Validate Email
       if (!validator.isEmail(body.email)) {
         return reply.send({
@@ -13,10 +14,14 @@ module.exports = (fastify) => ({
           message: "Please use a valid email address",
         });
       }
+
+      // Hash Password
       const hashedPassword = await bcrypt.hash(
         body.password,
         parseInt(process.env.SALT_ROUNDS)
       );
+
+      // Create User
       try {
         const data = await User.create({
           ...body,
@@ -26,11 +31,13 @@ module.exports = (fastify) => ({
       } catch (err) {
         return reply.send({ success: false, data: err });
       }
+
     },
   },
   patch: {
     handler: async (request, reply) => {
       const session = request.session.get("session");
+      let { body } = request
 
       // Authenticate
       if (!session) {
@@ -41,16 +48,21 @@ module.exports = (fastify) => ({
       }
 
       // Validate Email
-      if (!validator.isEmail(request.body.email)) {
+      if (!validator.isEmail(body.email)) {
         return reply.send({
           success: false,
           message: "Please use a valid email address.",
         });
       }
 
+      // Check for no name
+      if (body.name == '') {
+        body.name = null
+      }
+
       // Update
       try {
-        const user = await User.findOneAndUpdate(session.id, request.body, {
+        const user = await User.findOneAndUpdate(session.id, body, {
           new: true,
         });
         return reply.send({
@@ -65,6 +77,7 @@ module.exports = (fastify) => ({
           message: "There was an issue updating your account.",
         });
       }
+
     },
   },
 });
