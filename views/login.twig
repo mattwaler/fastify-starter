@@ -2,48 +2,31 @@
 {% set title = 'Login' %}
 
 {% block body %}
-  <script>
-    function login() {
-      return {
-        state: 'initial',
-        email: null,
-        password: null,
-        async submit() {
-          const { data } = await axios.post('/api/login', {
-            email: this.email,
-            password: this.password,
-          })
-          return data.success
-            ? window.location = '/'
-            : this.state = 'error'
-        }
-      }
-    }
-  </script>
-
-  <section x-data="login()" class="container py-16">
+  <section class="container py-16">
     <h1 class="text-4xl font-black">
       {{ title }}
     </h1>
-    <form class="mt-4 flex-wrap">
+    <form hx-post="/api/login" hx-target="#response" class="mt-4 flex-wrap">
       <label class="block">
         Email:
         <input
-          x-model="email"
-          class="block rounded w-full"
+          name="email"
           type="email"
+          class="block rounded w-full"
         >
       </label>
       <label class="block mt-4">
         Password:
         <input
-          @keydown.enter="submit"
-          x-model="password"
-          class="block rounded w-full"
+          name="password"
           type="password"
+          class="block rounded w-full"
         >
       </label>
-      <button class="mt-8 bg-gray-900 text-white px-4 py-2 rounded" @click.prevent="submit">Submit</button>
+      <button class="mt-8 bg-gray-900 text-white px-4 py-2 rounded">
+        Submit
+      </button>
     </form>
+    <div id="response"></div>
   </section>
 {% endblock %}

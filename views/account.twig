@@ -2,62 +2,36 @@
 {% set title = 'Account' %}
 
 {% block body %}
-  <script>
-    function update() {
-      return {
-        state: 'initial',
-        message: null,
-        email: '{{ user.email }}',
-        name: '{{ user.name ?? "" }}',
-        async submit() {
-          const { email, name } = this
-          const { data } = await axios.patch('/api/user', { email, name })
-          if (data.success) {
-            this.state = 'success'
-            this.message = data.message
-          } else {
-            this.state = 'error'
-            this.message = data.message ?? 'There was an issue updating your details, try again later.'
-          }
-          setTimeout(() => this.state = 'initial', 3000)
-        }
-      }
-    }
-  </script>
-
-  <section x-data="update()" class="container py-16">
+  <section class="container py-16">
     <h1 class="font-black text-6xl">
       {{ title }}
     </h1>
-    <form class="mt-4 flex-wrap">
+    <form hx-patch="/api/user" hx-target="#response" class="mt-4 flex-wrap">
       <label class="block">
         Email:
         <input
-          x-model="email"
+          name="email"
           class="block rounded w-full"
           type="email"
+          value="{{ user.email }}"
         >
       </label>
       <label class="block mt-4">
         Name:
         <input
-          x-model="name"
+          name="name"
           class="block rounded w-full"
           type="text"
+          value="{{ user.name ?? '' }}"
         >
       </label>
       <button
         class="mt-8 bg-gray-900 text-white px-4 py-2 rounded"
-        @click.prevent="submit"
+        type="submit"
       >
         Submit
       </button>
     </form>
-    <p
-      class="mt-4 font-bold"
-      :class="state == 'error' ? 'text-red-500' : 'text-blue-500'"
-      x-text="message"
-      x-show.transition="state != 'initial'"
-    ></p>
+    <div id="response"></div>
   </section>
 {% endblock %}
