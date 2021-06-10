@@ -4,11 +4,14 @@
   "description": "A starter for Fastify with Twig, Alpine, and Tailwind.",
   "main": "app.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=production run-p build:*",
+    "build:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css",
+    "build:js": "esbuild bundle/main.js --bundle --minify --outfile=public/_compiled/main.bundle.js",
     "dev": "NODE_ENV=development npm-run-all -p dev:*",
     "dev:fastify": "fastify start -w -l info -P app.js",
-    "dev:proxy": "sleep 3 && browser-sync start -c bs.config.js",
-    "dev:webpack": "webpack --watch",
+    "dev:proxy": "browser-sync start -c bs.config.js",
+    "dev:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css --watch",
+    "dev:js": "esbuild bundle/main.js --bundle --watch --outfile=public/_compiled/main.bundle.js",
     "gen:key": "secure-session-gen-key > secret-key",
     "start": "npm run gen:key && NODE_ENV=production fastify start -l info app.js",
     "test": "tap tests/**/*.test.js"
@@ -38,16 +41,11 @@
     "@tailwindcss/forms": "^0.2.1",
     "autoprefixer": "^10.2.5",
     "browser-sync": "^2.26.14",
-    "css-loader": "^5.2.4",
-    "mini-css-extract-plugin": "^1.6.0",
+    "esbuild": "^0.12.8",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.2.15",
     "postcss-import": "^14.0.2",
-    "postcss-loader": "^5.3.0",
-    "tailwindcss": "^2.1.2",
+    "tailwindcss": "^2.2.0-canary.14",
     "tailwindcss-debug-screens": "^2.0.0",
-    "tap": "^15.0.9",
-    "webpack": "^5.37.0",
-    "webpack-cli": "^4.7.0"
+    "tap": "^15.0.9"
   }
 }

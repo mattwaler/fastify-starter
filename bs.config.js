@@ -5,4 +5,5 @@ module.exports = {
   notify: false,
   reloadDebounce: 500,
   reloadDelay: 500,
+  open: false,
 }

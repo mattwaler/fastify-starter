@@ -1,6 +1,5 @@
 import 'alpinejs'
 import 'htmx.org'
-import './main.pcss'
 import axios from 'axios'
 
 // Toss axios on the window so we can use it in Alpine.
