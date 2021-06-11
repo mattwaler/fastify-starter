@@ -1,11 +1,11 @@
 # Fastify Starter
 
 A full-stack project starter, which is basically just a combination of the following tools:
-- Alpine
+- Alpine (3)
 - Fastify
+- HTMX
 - Mongoose
-- Tailwind
-- Turbolinks
+- Tailwind (2)
 - Twig
 
 ## Getting Started
