@@ -1,16 +1,22 @@
-import './alpine'
 import 'htmx.org'
+import Alpine from 'alpinejs'
 import axios from 'axios'
 
-// Toss axios on the window so we can use it in Alpine.
+// Toss these libraries on the window for ease of use.
 window.axios = axios
+window.Alpine = Alpine
 
-// Reinitialize Alpine When HTMX Alters the DOM.
+// Start Alpine when the page is ready.
+window.addEventListener('DOMContentLoaded', (event) => {
+  Alpine.start()
+});
+
+// Restart Alpine when the DOM is altered by HTMX.
 document.body.addEventListener('htmx:afterSwap', () => {
   Alpine.start()
 })
 
-// Creating a store
+// Creating an Alpine store.
 document.addEventListener('alpine:initializing', () => {
   Alpine.store('message', 'Hello from Alpine v3!')
 })
