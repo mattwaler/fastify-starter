@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production run-p build:*",
     "build:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css",
-    "build:js": "esbuild bundle/main.js --bundle --minify --outfile=public/_compiled/main.bundle.js",
+    "build:js": "esbuild bundle/main.js --bundle --outfile=public/_compiled/main.bundle.js",
     "dev": "NODE_ENV=development npm-run-all -p dev:*",
     "dev:fastify": "fastify start -w -l info -P app.js",
     "dev:proxy": "browser-sync start -c bs.config.js",
