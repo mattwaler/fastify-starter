@@ -2,7 +2,6 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 
 module.exports = async function (fastify, opts) {
-
   // Login
   fastify.post('/api/login', async function (request, reply) {
     const { body } = request
@@ -14,7 +13,10 @@ module.exports = async function (fastify, opts) {
         return reply.header('HX-Redirect', '/').send({ success: true })
       }
     } catch (err) {
-      return reply.view('partials/response', { message: 'Invalid credentials.' })
+      return reply.view('partials/response', {
+        success: false,
+        message: 'Invalid credentials.',
+      })
     }
   })
 
@@ -23,5 +25,4 @@ module.exports = async function (fastify, opts) {
     request.session.delete('session')
     return reply.redirect('/')
   })
-
 }

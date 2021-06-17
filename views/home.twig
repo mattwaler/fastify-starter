@@ -2,13 +2,45 @@
 {% set title = 'Home' %}
 
 {% block body %}
+
   <section class="container py-16">
     <h1 class="text-4xl font-black">
       Hello, {{ user.name ?? user.email ?? 'guest' }}!
     </h1>
     <p class="mt-2 text-lg">Welcome to my fastify starter project! Hope you like it.</p>
   </section>
-  <section class="container py-16">
-    <span x-data x-text="$store.message"></span>
+
+  {# Create the Store #}
+  <script>
+    document.addEventListener('alpine:initializing', () => {
+      Alpine.store('message', 'Default Message')
+    })
+  </script>
+
+  {# Display Store #}
+  <section x-data class="container py-16">
+    <p class="font-bold text-2xl">Display the store:</p>
+    <span x-text="$store.message"></span>
   </section>
+
+  {# Model the Store #}
+  <section x-data class="container py-16">
+    <p class="font-bold text-2xl">Model the store:</p>
+    <input type="text" x-model="$store.message" class="rounded mt-2">
+  </section>
+
+  {# Mutate the Store #}
+  <section x-data class="container py-16">
+    <p class="font-bold text-2xl">Mutate the store:</p>
+    <div class="flex mt-2">
+      <input type="text" x-ref="input" class="rounded">
+      <button
+        class="bg-gray-900 text-white rounded px-4 py-2 ml-2"
+        @click="$store.message = $refs.input.value"
+      >
+        Update Message!
+      </button>
+    </div>
+  </section>
+
 {% endblock %}

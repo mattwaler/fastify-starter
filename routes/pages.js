@@ -1,4 +1,3 @@
-const User = require('../models/User')
 const getServerData = require('../helpers/getServerData')
 
 module.exports = async function (fastify, opts) {
