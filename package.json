@@ -5,19 +5,19 @@
   "main": "app.js",
   "scripts": {
     "build": "NODE_ENV=production run-p build:*",
-    "build:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css",
-    "build:js": "esbuild bundle/main.js --bundle --outfile=public/_compiled/main.bundle.js",
+    "build:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css --minify --postcss",
+    "build:js": "esbuild bundle/main.js --outfile=public/_compiled/main.bundle.js --bundle",
     "dev": "NODE_ENV=development npm-run-all -p dev:*",
     "dev:fastify": "fastify start -w -l info -P app.js",
     "dev:proxy": "browser-sync start -c bs.config.js",
-    "dev:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css --watch",
-    "dev:js": "esbuild bundle/main.js --bundle --watch --outfile=public/_compiled/main.bundle.js",
+    "dev:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css --watch --postcss",
+    "dev:js": "esbuild bundle/main.js --outfile=public/_compiled/main.bundle.js --watch --bundle",
     "gen:key": "secure-session-gen-key > secret-key",
     "start": "npm run gen:key && NODE_ENV=production fastify start -l info app.js",
     "test": "tap tests/**/*.test.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matt Waler",
   "license": "ISC",
   "dependencies": {
     "alpinejs": "^3.0.6",
@@ -39,12 +39,11 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.2.1",
-    "autoprefixer": "^10.2.5",
     "browser-sync": "^2.26.14",
     "esbuild": "^0.12.8",
     "npm-run-all": "^4.1.5",
     "postcss-import": "^14.0.2",
-    "tailwindcss": "^2.2.0-canary.14",
+    "tailwindcss": "^2.2.2",
     "tailwindcss-debug-screens": "^2.0.0",
     "tap": "^15.0.9"
   }
