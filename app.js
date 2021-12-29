@@ -6,12 +6,7 @@ const mongoose = require('mongoose')
 module.exports = async function (fastify, opts) {
 
   // Database connection
-  await mongoose.connect(process.env.DATABASE, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  })
+  await mongoose.connect(process.env.DATABASE)
 
   // Load all plugins
   fastify.register(AutoLoad, {

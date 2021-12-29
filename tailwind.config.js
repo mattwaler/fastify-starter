@@ -1,6 +1,7 @@
 module.exports = {
-  darkMode: false,
-  mode: 'jit',
+  content: [
+    './views/**/*.twig',
+  ],
   theme: {
     container: {
       center: true,
@@ -9,18 +10,10 @@ module.exports = {
     debugScreens: {
       position: ['bottom', 'right'],
     },
-    screens: {
-      xs: '480px',
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-    },
   },
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-debug-screens'),
   ],
-  purge: [
-    './views/**/*.twig',
-  ],
+
 }
