@@ -5,8 +5,8 @@ This project aims to create the most pragmatic fullstack JS project by combining
 ## ⭐️ Requirements
 
 - [MongoDB](https://www.mongodb.com/)
-- [Node](https://nodejs.org/en/) `16.8.0`
-- [NVM](https://github.com/nvm-sh/nvm) (to manage your node versions easily)
+- [Node](https://nodejs.org/en/)
+- [NVM](https://github.com/nvm-sh/nvm)
 
 ## 🧰 Tools
 
