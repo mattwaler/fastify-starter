@@ -15,7 +15,7 @@ This template uses the following tools:
 - [Alpine.js](https://alpinejs.dev/)
 - [Fastify](https://www.fastify.io/)
 - [HTMX](https://htmx.org/)
-- [MongoDB]()
+- [MongoDB](https://www.mongodb.com/)
 - [Mongoose](https://mongoosejs.com/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Twig](https://github.com/twigjs/twig.js/wiki/Implementation-Notes)
