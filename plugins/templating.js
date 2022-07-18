@@ -2,7 +2,7 @@ const fp = require('fastify-plugin')
 const path = require('path')
 
 module.exports = fp(async function (fastify, opts) {
-  fastify.register(require('point-of-view'), {
+  fastify.register(require('@fastify/view'), {
     engine: {
       twig: require('twig')
     },

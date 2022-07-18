@@ -1,6 +1,6 @@
 require('dotenv').config()
 const path = require('path')
-const AutoLoad = require('fastify-autoload')
+const AutoLoad = require('@fastify/autoload')
 const mongoose = require('mongoose')
 
 module.exports = async function (fastify, opts) {
