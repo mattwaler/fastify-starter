@@ -3,17 +3,20 @@
   "version": "1.0.0",
   "description": "A starter for Fastify with Twig, Alpine, and Tailwind.",
   "main": "app.js",
+  "config": {
+		"css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css --postcss",
+    "js": "esbuild bundle/main.js --outfile=public/_compiled/main.bundle.js --bundle"
+	},
   "scripts": {
     "build": "NODE_ENV=production run-p build:*",
-    "build:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css --minify --postcss",
-    "build:js": "esbuild bundle/main.js --outfile=public/_compiled/main.bundle.js --bundle",
+    "build:css": "$npm_package_config_css --minify",
+    "build:js": "$npm_package_config_js",
     "dev": "NODE_ENV=development npm-run-all -p dev:*",
     "dev:fastify": "fastify start -w -l info -P app.js",
-    "dev:proxy": "browser-sync start -c bs.config.js",
-    "dev:css": "tailwindcss -i bundle/main.pcss -o public/_compiled/main.bundle.css --watch --postcss",
-    "dev:js": "esbuild bundle/main.js --outfile=public/_compiled/main.bundle.js --watch --bundle",
+    "dev:css": "$npm_package_config_css --watch",
+    "dev:js": "$npm_package_config_js --watch",
     "key": "npx @fastify/secure-session > secret-key",
-    "start": "npm run key && NODE_ENV=production fastify start -l info app.js",
+    "start": "NODE_ENV=production fastify start -l info app.js",
     "test": "tap tests/**/*.test.js"
   },
   "keywords": [],
@@ -39,7 +42,6 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.2",
-    "browser-sync": "^2.26.14",
     "esbuild": "^0.14.9",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
