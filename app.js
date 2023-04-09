@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 module.exports = async function (fastify, opts) {
 
   // Database connection
+  mongoose.set('strictQuery', false)
   await mongoose.connect(process.env.DATABASE)
 
   // Load all plugins
@@ -14,7 +15,7 @@ module.exports = async function (fastify, opts) {
     options: Object.assign({}, opts)
   })
 
-  // Load all pages
+  // Load all routes
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'routes'),
     options: Object.assign({}, opts)
