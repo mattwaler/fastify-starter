@@ -1,13 +1,16 @@
 const User = require('../models/User')
 const validator = require('validator')
+const delay = require('../helpers/delay')
 
 module.exports = async function (fastify, opts) {
   fastify.patch('/api/user', async function (request, reply) {
     const session = request.session.get('session')
 
+    await delay(1000)
+
     // Authenticate
     if (!session) {
-      return reply.view('partials/response', {
+      return reply.view('partials/alert', {
         success: false,
         message: 'Not authenticated.',
       })
@@ -15,7 +18,7 @@ module.exports = async function (fastify, opts) {
 
     // Validate Email
     if (!validator.isEmail(request.body.email)) {
-      return reply.view('partials/response', {
+      return reply.view('partials/alert', {
         success: false,
         message: 'Invalid email address.',
       })
@@ -24,15 +27,15 @@ module.exports = async function (fastify, opts) {
     // Update
     try {
       await User.findOneAndUpdate(session.id, request.body, { new: true })
-      return reply.view('partials/response', {
+      return reply.view('partials/alert', {
         success: true,
-        message: 'Account updated!',
+        message: 'Your account details have been updated successfully.',
       })
     } catch (err) {
       console.log(err)
-      return reply.view('partials/response', {
+      return reply.view('partials/alert', {
         success: false,
-        message: 'There was an error updating your account.',
+        message: 'There was an error updating your account. Please try again.',
       })
     }
   })

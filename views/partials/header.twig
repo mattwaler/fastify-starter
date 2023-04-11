@@ -1,8 +1,8 @@
 {% set buttonClasses = 'inline-block py-2 px-4 border border-transparent rounded-md text-sm font-medium hover:bg-opacity-75' %}
 
-<header class="bg-indigo-600">
+<header class="bg-slate-900">
   <nav class="container flex gap-4 flex-col items-center justify-between py-4 sm:flex-row">
-    <a class="flex items-center text-indigo-100" href="/">
+    <a class="flex items-center text-slate-200" href="/">
       <div class="w-6 h-auto">
         {% include '../svg/logo.svg' %}
       </div>
@@ -10,11 +10,11 @@
     </a>
     <div class="flex items-center gap-4">
       {% if user %}
-        <a class="{{ buttonClasses }} bg-indigo-500 text-white" href="/account">Account</a>
-        <a class="{{ buttonClasses }} bg-white text-indigo-600" href="/api/logout">Logout</a>
+        <a class="{{ buttonClasses }} border border-slate-200 text-slate-200" href="/account">Account</a>
+        <a class="{{ buttonClasses }} bg-slate-200" href="/api/logout">Logout</a>
       {% else %}
-        <a class="{{ buttonClasses }} bg-indigo-500 text-white" href="/create">Create Account</a>
-        <a class="{{ buttonClasses }} bg-white text-indigo-600" href="/login">Login</a>
+        <a class="{{ buttonClasses }} text-white" href="/create">Create Account</a>
+        <a class="{{ buttonClasses }} bg-slate-200 text-slate-900" href="/login">Login</a>
       {% endif %}
     </div>
   </nav>

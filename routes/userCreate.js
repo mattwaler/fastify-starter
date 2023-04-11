@@ -8,7 +8,7 @@ module.exports = async function (fastify, opts) {
 
     // Validate Email
     if (!validator.isEmail(body.email)) {
-      return reply.view('partials/response', {
+      return reply.view('partials/alert', {
         success: false,
         message: 'Please use a valid email address.',
       })
@@ -25,7 +25,7 @@ module.exports = async function (fastify, opts) {
       await User.create({ ...body, password: hashedPassword })
       return reply.header('HX-Redirect', '/login').send({ success: true })
     } catch (err) {
-      return reply.view('partials/response', {
+      return reply.view('partials/alert', {
         success: false,
         message: 'Something went wrong.',
       })

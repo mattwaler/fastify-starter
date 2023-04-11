@@ -12,7 +12,7 @@ module.exports = async function (fastify, opts) {
         return reply.header('HX-Redirect', '/').send({ success: true })
       }
     } catch (err) {
-      return reply.view('partials/response', {
+      return reply.view('partials/alert', {
         success: false,
         message: 'Invalid credentials.',
       })
